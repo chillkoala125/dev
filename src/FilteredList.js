@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import bakeryData from "./bakery-data.json";
 import BakeryItem from "./BakeryItem.js"
-import DisplayList from "./DisplayList.js"
 import "./App.css";
 // TODO: create a component that displays a single bakery item
 export default function FilteredList() {
