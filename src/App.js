@@ -53,9 +53,9 @@ function App() {
             
             
             <div class = "row">
-            <div class="column">
+            <div class="cards">
             {(bakeryData.filter(item => item.size === size)).filter(item => item.time === time).map((item, index) => ( // TODO: map bakeryData to BakeryItem components
-                                                                                                                      <BakeryItem image={item.image}
+                                                          <div class="cardrow">                                                            <BakeryItem image={item.image}
                                                                                                                       name= {item.name}
                                                                                                                       desc={item.description}
                                                                                                                       price={item.price}
@@ -65,18 +65,19 @@ function App() {
                                                                                                                       addPrice={addPrice}
                                                                                                                       items={items}
                                                                                                                       addItem={addItem}/>
-                                                                                                                      
+                                                                                      </div>
                                                                                                                       
                                                                                                                       ))}
             
             </div>
-            <div class="column">
+            <div class="cart">
             <h2>Cart</h2>
             {/* TODO: render a list of items in the cart */}
             {items.map((item) => (
                                   <p>{item.name}</p>
                                   ))}
             <p>Total: ${cartTotal}</p>
+            
             </div>
             </div>
             </div>
