@@ -5,10 +5,10 @@ import { useState } from 'react';
 export default function BakeryItem({ image, name, desc, price, size, time, cartTotal, addPrice, addItem, items }) {
     const [count, increment] = useState(0);
       function handleClick() {
-          increment(count+1);
         addPrice(cartTotal + price);
-          addItem([...items, { name: name, count: count}]);
+          addItem([...items, { name: name}]);
       }
+
 
   return (
           <div class="cardcol">
@@ -18,7 +18,7 @@ export default function BakeryItem({ image, name, desc, price, size, time, cartT
           <p>{price}</p>
           <p>{size}</p>
           <p>{time}</p>
-          <button onClick={handleClick}>Add to Cart</button>
+          <p><button onClick={handleClick}>Add to Cart</button></p>
           </div>
           </div>
   );
