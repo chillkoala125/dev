@@ -23,6 +23,27 @@ function App() {
     function onSelectFilteredTime(event) {
         changeTime(event.target.value);
     }
+    
+    function resetFilters() {
+       changeSize("All");
+        changeTime("All");
+        document.getElementById('sizeSel').value = 'All';
+        document.getElementById('timeSel').value = 'All';
+    }
+    
+    function filterSizeList() {
+        if(size === "All")
+            return bakeryData;
+        else
+            return bakeryData.filter(item => item.size === size);
+    }
+    
+    function filterTimeList() {
+        if(time === "All")
+            return filterSizeList();
+        else
+            return filterSizeList().filter(item => item.time === time);
+    }
 
    
     return (
@@ -30,31 +51,32 @@ function App() {
             <h1>My Bakery</h1> {/* TODO: personalize your bakery (if you want) */}
             <div>Filter by Category:</div>
             <div>
-            <select
+            <select id="sizeSel"
             onChange={onSelectFilteredSize}
             >
-            <option value="">All</option>
+            <option value="All">All</option>
             <option value="large" selected>large</option>
             <option value="medium">medium</option>
             <option value="small">small</option>
             </select>
             <div>
-            <select
+            <select id="timeSel"
             onChange={onSelectFilteredTime}
             >
-            <option value="">All</option>
+            <option value="All">All</option>
             <option value="morning" selected>morning</option>
             <option value="afternoon">afternoon</option>
             <option value="evening">evening</option>
             </select>
             </div>
+            <button onClick={resetFilters}>Reset Filters</button>
             </div>
             
             
             
             <div class = "row">
             <div class="cards">
-            {(bakeryData.filter(item => item.size === size)).filter(item => item.time === time).map((item, index) => ( // TODO: map bakeryData to BakeryItem components
+            {filterTimeList().map((item, index) => ( // TODO: map bakeryData to BakeryItem components
                                                           <div class="cardrow">                                                            <BakeryItem image={item.image}
                                                                                                                       name= {item.name}
                                                                                                                       desc={item.description}
