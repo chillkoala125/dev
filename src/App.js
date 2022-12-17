@@ -2,6 +2,7 @@ import "./App.css";
 import {  useState  } from "react";
 import bakeryData from "./bakery-data.json";
 import BakeryItem from "./BakeryItem.js"
+import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 
 /* ####### DO NOT TOUCH -- this makes the image URLs work ####### */
@@ -56,7 +57,6 @@ function App() {
             <div class = "row">
             <div class="column">
             <CardGroup>
-            
             {(bakeryData.filter(item => item.size === size)).filter(item => item.time === time).map((item, index) => ( // TODO: map bakeryData to BakeryItem components
                                                                                                                       <BakeryItem image={item.image}
                                                                                                                       name= {item.name}
@@ -71,9 +71,9 @@ function App() {
                                                                                                                       
                                                                                                                       
                                                                                                                       ))}
+            
             </CardGroup>
             </div>
-            
             <div class="column">
             <h2>Cart</h2>
             {/* TODO: render a list of items in the cart */}
