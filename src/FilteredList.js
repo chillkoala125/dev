@@ -8,8 +8,10 @@ export default function FilteredList() {
     /* add your cart state code here */
     const [cartTotal, addPrice] = useState(0);
     const [items, addItem] = useState([]);
-    const [size, changeSize] = useState("large");
-    const [time, changeTime] = useState("morning");
+    const [size, changeSize] = useState("All");
+    const [time, changeTime] = useState("All");
+    const [sort, changeSort] = useState("None");
+    
     
     function onSelectFilteredSize(event) {
         changeSize(event.target.value);
@@ -17,12 +19,17 @@ export default function FilteredList() {
     function onSelectFilteredTime(event) {
         changeTime(event.target.value);
     }
+    function onSelectSort(event) {
+        changeSort(event.target.value);
+    }
     
     function resetFilters() {
        changeSize("All");
         changeTime("All");
+        changeSort("None");
         document.getElementById('sizeSel').value = 'All';
         document.getElementById('timeSel').value = 'All';
+        document.getElementById('sort').value = 'None';
     }
     
     function filterSizeList() {
@@ -36,7 +43,16 @@ export default function FilteredList() {
         if(time === "All")
             return filterSizeList();
         else
-            return bakeryData.filter(item => item.time === time);
+            return filterSizeList().filter(item => item.time === time);
+    }
+    
+    function sortList() {
+        if(sort === "None")
+            return filterTimeList();
+        else if(sort === "Ascending")
+            return filterTimeList().sort((a, b) => a.price > b.price ? 1 : -1);
+        else
+            return filterTimeList().sort((a, b) => a.price < b.price ? 1 : -1);
     }
     
     function handleRemove() {
@@ -54,8 +70,8 @@ export default function FilteredList() {
             <select id="sizeSel"
             onChange={onSelectFilteredSize}
             >
-            <option value="All">All</option>
-            <option value="large" selected>large</option>
+            <option value="All" selected>All</option>
+            <option value="large" >large</option>
             <option value="medium">medium</option>
             <option value="small">small</option>
             </select>
@@ -63,20 +79,30 @@ export default function FilteredList() {
             <select id="timeSel"
             onChange={onSelectFilteredTime}
             >
-            <option value="All">All</option>
-            <option value="morning" selected>morning</option>
+            <option value="All" selected>All</option>
+            <option value="morning" >morning</option>
             <option value="afternoon">afternoon</option>
             <option value="evening">evening</option>
             </select>
             </div>
-            <button onClick={resetFilters}>Reset Filters</button>
+            <div>Sort by Price:</div>
+            <div>
+            <select id="sort"
+            onChange={onSelectSort}
+            >
+            <option value="None" selected>None</option>
+            <option value="Ascending" >Ascending</option>
+            <option value="Descending">Descending</option>
+            </select>
+            </div>
+            <button onClick={resetFilters}>Reset</button>
             </div>
             
             
             
             <div class = "row">
             <div class="cards">
-            {filterTimeList().map((item, index) => ( // TODO: map bakeryData to BakeryItem components
+            {sortList().map((item, index) => ( // TODO: map bakeryData to BakeryItem components
                                                           <div class="cardrow">                                                            <BakeryItem image={item.image}
                                                                                                                       name= {item.name}
                                                                                                                       desc={item.description}
