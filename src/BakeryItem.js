@@ -11,14 +11,15 @@ export default function BakeryItem({ image, name, desc, price, size, time, cartT
       }
 
   return (
-          <div>
+          <div class="cardcol">
+          <div class="card">
           <img src={image} width="200"/>
           <h5>{name}</h5>
-          <p>{desc}</p>
           <p>{price}</p>
           <p>{size}</p>
           <p>{time}</p>
           <button onClick={handleClick}>Add to Cart</button>
+          </div>
           </div>
   );
 }
