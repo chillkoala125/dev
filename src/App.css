@@ -42,7 +42,7 @@
 }
 
 .cart {
-    flex: 20%;
+    flex: 25%;
 }
 
 .card {
@@ -53,7 +53,8 @@
 
 .cards {
   display: flex;
-  flex:80%;
+  flex-wrap: wrap;
+  flex:75%;
 }
 
 .cardcol {
